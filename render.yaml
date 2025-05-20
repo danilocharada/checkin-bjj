@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: checkin-bjj
+    env: python
+    plan: free
+    branch: main  # ou "master", dependendo do nome correto da sua branch no GitHub
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app

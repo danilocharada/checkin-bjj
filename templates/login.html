@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Professor</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #121212cc;
+      padding: 30px 25px;
+      border-radius: 14px;
+      box-shadow: 0 0 25px rgba(225, 6, 0, 0.6);
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      color: #e10600;
+      margin-bottom: 24px;
+      font-size: 1.8rem;
+      text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      border: none;
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+      font-size: 15px;
+      box-shadow: 0 0 6px rgba(225, 6, 0, 0.4);
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      background-color: #e10600;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(225, 6, 0, 0.8);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #b00400;
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
+    }
+
+    .mensagem {
+      margin-top: 15px;
+      font-size: 0.95rem;
+      color: #ff4d4d;
+    }
+
+    .logo {
+      max-width: 90px;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 25px 20px;
+      }
+
+      .login-container h1 {
+        font-size: 1.6rem;
+      }
+
+      button {
+        padding: 9px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="{{ url_for('static', filename='bj.jpg') }}" alt="Logo BJ" class="logo" />
+    <h1>Login Professor</h1>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mensagem">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    
+    <form method="POST" action="{{ url_for('login') }}">
+      <input type="text" name="username" placeholder="Usuário" required />
+      <input type="password" name="password" placeholder="Senha" required />
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Painel Professor</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a1a, #000000);
+      color: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 15px;
+    }
+
+    .container {
+      background-color: #121212cc;
+      border-radius: 12px;
+      padding: 30px 25px;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(225, 6, 0, 0.3);
+      text-align: center;
+    }
+
+    img.logo {
+      max-width: 140px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #e10600aa;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    img.logo:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      margin-bottom: 30px;
+      color: #e10600;
+      text-shadow: 1px 1px 4px #7f0000;
+    }
+
+    h3 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e10600;
+      padding-bottom: 8px;
+      text-align: left;
+      color: #ff2b2b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      margin-bottom: 35px;
+    }
+
+    thead th {
+      background-color: #b00400;
+      color: white;
+      font-weight: 700;
+      padding: 12px 15px;
+      border-radius: 8px 8px 0 0;
+      text-align: left;
+      user-select: none;
+    }
+
+    tbody tr {
+      background-color: #1e1e1e;
+      transition: background-color 0.25s ease;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px #e1060022;
+    }
+    tbody tr:hover {
+      background-color: #2c0d0d;
+    }
+
+    tbody td {
+      padding: 12px 15px;
+      color: #ddd;
+      vertical-align: middle;
+      border-bottom: 1px solid transparent;
+      word-break: break-word;
+    }
+
+    /* Botões */
+    button {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-aceitar {
+      background-color: #28a745;
+      color: white;
+      margin-right: 8px;
+      box-shadow: 0 2px 6px #1f7a31aa;
+    }
+    .btn-aceitar:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+      box-shadow: 0 4px 14px #1f7a31cc;
+    }
+
+    .btn-rejeitar {
+      background-color: #e10600;
+      color: white;
+      margin-right: 8px;
+      box-shadow: 0 2px 6px #9b0000aa;
+    }
+    .btn-rejeitar:hover {
+      background-color: #b00400;
+      transform: scale(1.05);
+      box-shadow: 0 4px 14px #9b0000cc;
+    }
+
+    .btn-lixeira {
+      background-color: #6c757d;
+      color: white;
+      padding: 8px 10px;
+      font-size: 16px;
+      box-shadow: 0 2px 6px #495057aa;
+    }
+    .btn-lixeira:hover {
+      background-color: #5a6268;
+      transform: scale(1.1);
+      box-shadow: 0 4px 14px #495057cc;
+    }
+
+    /* Links */
+    a {
+      color: #e10600;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    a:hover {
+      color: #ff2b2b;
+      text-decoration: underline;
+    }
+
+    /* Responsividade */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      table {
+        border-spacing: 0 8px;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        padding: 15px 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px #e1060022;
+      }
+
+      tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 8px;
+        border: none;
+        font-size: 14px;
+        color: #eee;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: #ff4d4d;
+      }
+
+      tbody td button {
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="{{ url_for('static', filename='bj.jpg') }}" alt="Logo BJ" class="logo" />
+
+    <h1>Painel do Professor</h1>
+
+    <h3>Check-ins Pendentes</h3>
+    {% if checkins_pendentes %}
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for key, checkin in checkins_pendentes.items() %}
+        <tr>
+          <td data-label="Nome">{{ checkin['nome'] }}</td>
+          <td data-label="Ações">
+            <form method="post" action="/aceitar/{{ key }}" style="display:inline;">
+              <button class="btn-aceitar" type="submit" title="Aceitar Check-in">✔️ Aceitar</button>
+            </form>
+            <form method="post" action="/rejeitar/{{ key }}" style="display:inline;">
+              <button class="btn-rejeitar" type="submit" title="Rejeitar Check-in">✖️ Rejeitar</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum check-in pendente.</p>
+    {% endif %}
+
+    <h3>Histórico de Presença</h3>
+    {% if historico %}
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Total de Aulas</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for nome, total in historico.items() %}
+        <tr>
+          <td data-label="Nome">{{ nome }}</td>
+          <td data-label="Total de Aulas">{{ total }}</td>
+          <td data-label="Excluir">
+            <form method="post" action="/apagar/{{ nome | urlencode }}" style="display:inline;">
+              <button class="btn-lixeira" type="submit" title="Apagar histórico de {{ nome }}">🗑️</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum histórico disponível.</p>
+    {% endif %}
+
+    <a href="{{ url_for('aluno') }}">← Voltar para Check-in Aluno</a>
+  </div>
+</body>
+</html>

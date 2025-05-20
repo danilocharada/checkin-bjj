@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Check-in Aluno</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background-color: #000000;
+      border-radius: 12px;
+      padding: 35px 20px;
+      box-shadow: 0 0 20px #bd3831, 0 0 40px #690808 inset;
+      width: 90%;
+      max-width: 350px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 50%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #000000;
+    }
+
+    h1, h2 {
+      margin: 5px 0 15px 0;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      padding: 8px 12px;
+      margin: 10px 0 16px 0;
+      border: 2px solid #e10600;
+      background-color: #000;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: transparent;
+      color: #e10600;
+      border: 2px solid #e10600;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 90%;
+      margin-bottom: 10px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e10600;
+      color: white;
+    }
+
+    .link-professor {
+      display: inline-block;
+      text-decoration: none;
+      color: #e10600;
+      border: 2px solid #e10600;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+
+    .link-professor:hover {
+      background-color: #e10600;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="{{ url_for('static', filename='bj.jpg') }}" alt="Logo BJJ" />
+
+    <h1>Danilobjj</h1>
+    <h2>Jiu Jitsu</h2>
+
+    <form method="post" action="/">
+      <input type="text" name="nome" placeholder="Digite seu nome" required />
+      <button type="submit">Fazer Check-in</button>
+    </form>
+
+    <a class="link-professor" href="{{ url_for('login') }}">Login Professor</a>
+  </div>
+</body>
+</html>
